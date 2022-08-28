@@ -6,7 +6,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"regexp"
@@ -487,7 +486,6 @@ func (t *Task) ticktickWrite() error {
 func (t *Task) Sync() {
 	// Read from notion first. If the task changed, push chages to ticktick
 	changed, err := t.notionRead()
-	fmt.Println("notion changed:", changed)
 	if err != nil {
 		log.Printf("[ERROR]: Error reading from notion (err: %v)\n", err)
 	}
@@ -497,11 +495,9 @@ func (t *Task) Sync() {
 			log.Printf("[ERROR]: Error writing to ticktick (err: %v)\n", err)
 		}
 	}
-	fmt.Printf("after notion %#v\n", t)
 
 	// Read from ticktick second. If the task changed, push changes to notion
 	changed, err = t.ticktickRead()
-	fmt.Println("ticktick changed:", changed)
 	if err != nil {
 		log.Printf("[ERROR]: Error reading from ticktick (err: %v)\n", err)
 	}
@@ -511,7 +507,6 @@ func (t *Task) Sync() {
 			log.Printf("[ERROR]: Error writing to notion (err: %v)\n", err)
 		}
 	}
-	fmt.Printf("after ticktick %#v\n", t)
 }
 
 // Setup function initalizes a list of tasks
