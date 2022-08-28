@@ -1,9 +1,0 @@
-{
-  "devDependencies": {
-    "@types/node": "^18.6.3"
-  },
-  "dependencies": {
-    "@notionhq/client": "^2.1.1",
-    "ticktick-wrapper": "^0.2.0"
-  }
-}
