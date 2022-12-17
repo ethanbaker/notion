@@ -19,9 +19,10 @@ type Credentials struct {
 
 // Constants
 const CREDENTIAL_PATH = "./_credentials/credentials.json"
+const CYCLE_DURATION = time.Hour // How long will the program check for updated tasks
+const DAY_OFFSET = 4 * time.Hour // How long will the program offset a day (so tasks done at midnight don't overshoot)
 
 var TRUE = true
-var FALSE = false
 
 var QUERY = notionapi.DatabaseQuery{
 	Filter: &notionapi.DatabaseQueryFilter{
@@ -31,8 +32,6 @@ var QUERY = notionapi.DatabaseQuery{
 		},
 	},
 }
-
-const CYCLE_DURATION = time.Minute
 
 // Globals
 var credentials Credentials
@@ -45,11 +44,6 @@ type RecurringTask struct {
 	Active        bool      // Whether or not the recurring task should be updated
 
 	ID string // The Notion ID of the task
-}
-
-// utcToNotion converts a time from UTC (in the task struct) to Notion's formatting
-func utcToNotion(t time.Time) string {
-	return t.Format(time.RFC3339)
 }
 
 // Init initalizes the recurring task
@@ -171,8 +165,8 @@ func (t *RecurringTask) Sync() {
 
 	// If 'Done' has been checked, update 'Last Completed' to today and reset 'Done' to false
 	if t.Done {
-		now := time.Now()
-		t.LastCompleted = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
+		now := time.Now().Add(-DAY_OFFSET)
+		t.LastCompleted = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 		t.Done = false
 
 		// Write the updated values to Notion
