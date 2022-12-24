@@ -89,12 +89,6 @@ func (t *RecurringTask) readNotion() error {
 
 		case "Last Completed":
 			if value.Date != nil {
-				/*
-					date, err := notionToUtc(value.Date.Start.Time)
-					if err != nil {
-						return err
-					}
-				*/
 				t.LastCompleted = value.Date.Start.Time
 			}
 
@@ -166,7 +160,7 @@ func (t *RecurringTask) Sync() {
 	// If 'Done' has been checked, update 'Last Completed' to today and reset 'Done' to false
 	if t.Done {
 		now := time.Now().Add(-DAY_OFFSET)
-		t.LastCompleted = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+		t.LastCompleted = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 		t.Done = false
 
 		// Write the updated values to Notion
