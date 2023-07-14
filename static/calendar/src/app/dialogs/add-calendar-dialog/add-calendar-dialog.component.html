@@ -1,0 +1,20 @@
+<div class="container">
+    <h1 mat-dialog-title>Add Calendar</h1>
+
+    <div mat-dialog-content class="form">
+        <mat-form-field>
+            <mat-label>Url:</mat-label>
+            <input matInput type="text" [formControl]="urlControl" [(ngModel)]="calendar.url">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Color:</mat-label>
+            <input matInput type="color" [formControl]="colorControl" [(ngModel)]="calendar.color">
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="actions">
+        <button mat-raised-button color="accent" (click)="close()">Cancel</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="calendar" cdkFocusInitial>Add</button>
+    </div>
+</div>

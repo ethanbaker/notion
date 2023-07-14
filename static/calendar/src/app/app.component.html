@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="title-container">
+    <h1>Notion Calendar Generator</h1>
+  </div>
+
+  <div class="list-container">
+    <mat-list>
+      <mat-list-item *ngFor="let calendar of calendars">
+        <circle matListItemIcon [color]="calendar.color"></circle>
+        <div matListItemLine class="list-item-container">
+          <p>{{ calendar.url }}</p>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <button mat-raised-button color="primary" (click)="addCalendar()">Add Calendar</button>
+  </div>
+</div>

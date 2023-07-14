@@ -1,0 +1,9 @@
+.form, mat-form-field {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
