@@ -1,0 +1,79 @@
+<div class="container">
+
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+
+    <mat-tab label="Estimates">
+      <div class="estimates">
+        <h2>Estimates</h2>
+
+        <mat-list>
+          <mat-list-item *ngFor="let item of costCalculatorService.estimates | keyvalue" role="listitem">
+            <span matListItemTitle>{{ item.key }}</span>
+            <span matListItemLine>{{ item.value | currency }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Expenses">
+      <div class="expenses">
+        <h2>Expenses</h2>
+
+        <mat-list>
+          <mat-list-item *ngFor="let item of costCalculatorService.fixed | keyvalue" role="listitem">
+            <span matListItemTitle>{{ item.key }}</span>
+            <span matListItemLine>{{ item.value | currency }}</span>
+          </mat-list-item>
+        </mat-list>
+
+        <mat-selection-list [(ngModel)]="optionalExpenses">
+          <mat-list-option [color]="CHECKBOX_COLOR" disableRipple *ngFor="let item of costCalculatorService.optional | keyvalue" [value]="item.key">
+            <span matListItemTitle>{{ item.key }}</span>
+            <span matListItemLine>{{ item.value | currency }}</span>
+          </mat-list-option>
+        </mat-selection-list>
+
+        <mat-list>
+          <mat-list-item *ngFor="let item of costCalculatorService.flexible | keyvalue" role="listitem">
+            <span matListItemTitle>{{ item.key }}</span>
+            <input matListItemLine [value]="item.value | currency" (blur)="updateFlexible(item.key, $event)" (keydown.enter)="unfocus($event)">
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Summary">
+      <div class="summary">
+        <h2>Summary</h2>
+
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Total Estimated Stipend</span>
+            <span matListItemLine>{{ estimateSum() | currency }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Fixed Expenses</span>
+            <span matListItemLine>{{ fixedSum() | currency }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Estimated Flexible Expenses</span>
+            <span matListItemLine>{{ flexibleSum() | currency }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Estimated Optional Expenses</span>
+            <span matListItemLine>{{ optionalSum() | currency }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Total Estimated Expenses</span>
+            <span matListItemLine>{{ expenses() | currency }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Total Estimated Refund</span>
+            <span matListItemLine>{{ refund() | currency }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

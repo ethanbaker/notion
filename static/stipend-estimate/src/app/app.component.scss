@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.estimates, .expenses, .summary {
+    height: 100vh;
+    overflow: hidden;
+
+    mat-tab {
+        overflow: hidden;
+    }
+}
+
+h2 {
+    margin: 0;
+    margin-top: 2em;
+}
+
+mat-list, mat-selection-list {
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    mat-list-item, mat-list-option {
+        margin-top: 1em;
+        max-width: 100%;
+    }
+}
+
+span[matListItemTitle] {
+    font-weight: bolder;
+    font-size: 1.1em;
+}
+
+input {
+    width: 95%;
+
+    margin: 0;
+    margin-top: 0.3em;
+    padding: 0.2em;
+
+    position: relative;
+    left: 2px;
+
+    background-color: #191919;
+    border: solid 2px rgba(255, 255, 255, 0.81);
+
+    &:focus {
+        font-weight: bolder;
+        outline-offset: 0;
+    }
+}
