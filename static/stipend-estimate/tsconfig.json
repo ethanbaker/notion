@@ -2,8 +2,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "baseUrl": "./stipend-estimate",
+    "outDir": "./dist/stipend-estimate",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
