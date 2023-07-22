@@ -19,8 +19,9 @@ type Credentials struct {
 
 // Constants
 const CREDENTIAL_PATH = "./_credentials/credentials.json"
-const CYCLE_DURATION = time.Hour // How long will the program check for updated tasks
-const DAY_OFFSET = 4 * time.Hour // How long will the program offset a day (so tasks done at midnight don't overshoot)
+const CYCLE_DURATION = time.Hour       // How long will the program check for updated tasks
+const DAY_OFFSET = 4 * time.Hour       // How long will the program offset a day (so tasks done at midnight don't overshoot)
+const TIMEZONE_OFFSET = -4 * time.Hour // What is the time difference between UTC and the user's timezone
 
 var TRUE = true
 
@@ -76,7 +77,7 @@ func (t *RecurringTask) readNotion() error {
 	// Get the page property values from their IDs
 	properties, ok := page.Properties.(notionapi.DatabasePageProperties)
 	if !ok {
-		return errors.New("Could not get properties from page")
+		return errors.New("could not get properties from page")
 	}
 
 	// Loop through the properties and add the specified ones to the task
@@ -118,7 +119,7 @@ func (t *RecurringTask) writeNotion() error {
 	// Get the page property values from their IDs
 	properties, ok := page.Properties.(notionapi.DatabasePageProperties)
 	if !ok {
-		return errors.New("Could not get properties from page")
+		return errors.New("could not get properties from page")
 	}
 
 	// For each property, change the current value of the property to the value in the struct

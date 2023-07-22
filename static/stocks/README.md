@@ -1,6 +1,8 @@
-# Static Stock Integration
+# Static Stock Widget
 
-This static stock integration shows my stock purchases for a notion embed.
+This static stock integration shows my stock purchases for a Notion embed. The widget
+from [tradingview](https://www.tradingview.com/widget/market-overview)is encapsulated
+and hosted at [stocks.notion.ethanbaker.dev](https://stocks.notion.ethanbaker.dev).
 
 ## Adding a Stock
 
